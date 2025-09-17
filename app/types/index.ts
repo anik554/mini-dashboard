@@ -1,0 +1,1 @@
+export type {IUsers} from "@/app/types/user.type"
