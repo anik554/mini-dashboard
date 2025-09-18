@@ -1,5 +1,7 @@
 'use client'
 import Card from '@/app/components/Card'
+import Loader from '@/app/components/Loader'
+import { apiPosts } from '@/app/constants/api.urls'
 import { useFetch } from '@/app/hooks/useFetch'
 import { IPosts } from '@/app/types/post.type'
 import { useParams } from 'next/navigation'
@@ -7,13 +9,13 @@ import { useParams } from 'next/navigation'
 export default function PostDetail() {
   const params = useParams()
   const id = params?.id
-  const { data, loading, error, refetch } = useFetch<IPosts>(id ? `https://jsonplaceholder.typicode.com/posts/${id}` : null)
+  const { data, loading, error } = useFetch<IPosts>(id ? `${apiPosts}/${id}` : null)
 
   return (
     <div>
       <button onClick={() => history.back()} className="mb-4 text-sm text-indigo-600">← Back</button>
 
-      {loading && <div>Loading post…</div>}
+      {loading && <Loader />}
       {error && <div className="text-red-600">Failed to load post: {error}</div>}
 
       {data && (

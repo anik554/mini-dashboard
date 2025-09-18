@@ -13,7 +13,7 @@ export default function Sidebar() {
         initial={{ width: 64 }}
         animate={{ width: open ? 250 : 64 }}
         transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-        className="bg-slate-800 text-white h-screen p-3"
+        className="bg-slate-800 text-white min-h-screen p-3"
       >
         <div className="flex items-center justify-between mb-6">
           <span className="text-lg font-bold">{open ? 'Mini Dashboard' : 'MD'}</span>
