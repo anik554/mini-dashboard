@@ -38,14 +38,17 @@ export default function UsersPage() {
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="min-w-full border-collapse">
             <thead>
-              <tr className="bg-slate-200 border-b">
-                <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">
+              <tr className="bg-slate-500 border-b">
+                <th className="px-6 py-3 text-left text-md font-bold text-white">
+                  S/N
+                </th>
+                <th className="px-6 py-3 text-left text-md font-bold text-white">
                   Name
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">
+                <th className="px-6 py-3 text-left text-md font-bold text-white">
                   Email
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-slate-700">
+                <th className="px-6 py-3 text-left text-md font-bold text-white">
                   Company
                 </th>
               </tr>
@@ -56,14 +59,17 @@ export default function UsersPage() {
                   key={u.id}
                   onClick={() => setSelected(u)}
                   className={`cursor-pointer transition-colors duration-200 ${
-                    idx % 2 === 0 ? "bg-white" : "bg-slate-50"
+                    idx % 2 === 0 ? "bg-white" : "bg-slate-100"
                   } hover:bg-indigo-50`}
                 >
-                  <td className="px-6 py-3 text-slate-800 font-medium">
+                  <td className="px-6 py-3 w-3 text-slate-800 font-sm">
+                    {Number(idx) + 1 +"."}
+                  </td>
+                  <td className="px-6 py-3 text-slate-800 font-sm">
                     {u.name}
                   </td>
-                  <td className="px-6 py-3 text-slate-600">{u.email}</td>
-                  <td className="px-6 py-3 text-slate-600">
+                  <td className="px-6 py-3 text-slate-600 font-sm">{u.email}</td>
+                  <td className="px-6 py-3 text-slate-600 font-sm">
                     {u.company?.name}
                   </td>
                 </tr>

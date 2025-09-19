@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useFetch } from "../hooks/useFetch";
-import { IPosts } from "../types/post.type";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 import { apiPosts } from "../constants/api.urls";
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
+import { IPosts } from "../types";
 
 const container = {
   hidden: {},
@@ -22,12 +22,9 @@ const item = {
 };
 
 export default function PostsPage() {
-  const [simulateError, setSimulateError] = useState(false);
   const [page, setPage] = useState(1);
   const perPage = 10;
-
-  const url = simulateError ? `${apiPosts}/invalid-endpoint` : apiPosts;
-  const { data, loading, error, refetch } = useFetch<IPosts[]>(url);
+  const { data, loading, error, refetch } = useFetch<IPosts[]>(apiPosts);
 
   const paginatedData = data
     ? data.slice((page - 1) * perPage, page * perPage)
@@ -41,14 +38,6 @@ export default function PostsPage() {
         <h2 className="text-2xl font-semibold">Posts</h2>
         <div className="flex gap-2 items-center">
           <button
-            onClick={() => setSimulateError((s) => !s)}
-            className={`px-3 py-1 rounded ${
-              simulateError ? "bg-red-500 text-white" : "bg-slate-200"
-            }`}
-          >
-            {simulateError ? "Simulating Error" : "Simulate Error"}
-          </button>
-          <button
             onClick={() => refetch?.()}
             className="px-3 py-1 rounded bg-indigo-600 text-white"
           >
@@ -58,7 +47,7 @@ export default function PostsPage() {
       </div>
 
       {loading && <Loader />}
-      
+
       {error && (
         <div className="bg-red-100 text-red-700 p-4 rounded mb-4">
           Failed to load posts: {error}
